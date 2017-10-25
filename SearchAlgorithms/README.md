@@ -9,3 +9,5 @@ First, we define the problem (PROBLEM FORMUTALION) and the we use uninformed (UN
 
 To test the solution, use the command:
 python solver.py -i(informed)/-u(uninformed) textfile.txt
+
+The program will create a file named "AI.txt" that contains the solution and the time and number of iterations to sovle the problem.
