@@ -11,7 +11,7 @@ except IOError:
     print("Error creating file")
 
 # Importing the libraries
-from problemFormulation_COMB import Problem
+from problemFormulation import Problem
 from debug import *
 from operator import itemgetter
 import datetime
