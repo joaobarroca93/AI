@@ -1,7 +1,7 @@
 # TEXT FILE EXAMPLE
 #verticeName weight
 VK  19.64
-#edge vertice1 vertice2)
+#edge vertice1 vertice2
 E VPM VK1
-#launchDate  maxPayload fixedCost varCost
+#launch date maxPayload fixedCost varCost
 L 14082017 22.8 62 0.4
