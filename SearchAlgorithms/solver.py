@@ -4,7 +4,7 @@ Created on Fri Oct 20, 2017
 @author: João Barroca <joao.barroca@tecnico.ulisboa.pt>
 """
 
-# Creating file
+# Creates a file to write the data of the performed tests
 try:
     file = open("AI.txt","a")
 except IOError:
@@ -19,35 +19,43 @@ import time
 import sys
 import search
 
-# Processing the commands reveiced throught terminal
+# Process the commands reveiced throught terminal
 commands = sys.argv
 if len(commands) != 3 or commands[1] != '-i' and commands[1] != '-u':
     sys.exit("CommandError: command line must be solver.py -i(informed)/-u(uninformed) textfilename.txt")
 
-# Importing the data from text file
+# Imports the data from text file
 verticesDict = {}
 launchesDict = {}
 verticesMapping = {}
 launches = []
 edges = []
 epochDate = datetime.date(1900, 1, 1)
-# Reading the data
+# Reads the data from file
 with open(commands[2]) as fh:
     for line in fh:
         #if line[0] == 'V':
         if 'V' in line[0]:
+            # Dict of the vertices whoose keys are the available vertices and values are their weight
             verticesDict[line.split()[0]] = [float(line.split()[1])]
         elif 'E' in line:
+            # Edges
             edges.append(line.split()[1:3])
         elif 'L' in line:
+            # Delta is the time (in days) since the epoch (1/1/1900) till the launch day
+            # Since a variable in python can have 64bits, we dont have to be worry about overflows
             delta = datetime.date(int(line.split()[1][4:9]), int(line.split()[1][2:4]), int(line.split()[1][0:2])) - epochDate
             launches.append([delta.days, line.split()[1], float(line.split()[2]), float(line.split()[3]), float(line.split()[4])])
+            # Sorts launches by date
             launches.sort(key = itemgetter(0))
     counter = 1
+
+    # Creates  a dict of the launches whoose keys are the available launches (already orderer by date) with a list containing
+    # ['date', maximum payload, fixed cost, variable cost] as valors
     for launch in launches:
         launchesDict['L'+str(counter)] = launch[1:5]
         counter = counter + 1
-
+    # Creates a dict whoose keys are the available vertices with all the vertices that can connect with as valors
     for edge in edges:
         if edge[0] in verticesMapping:
             verticesMapping[edge[0]].append(edge[1])
@@ -57,12 +65,15 @@ with open(commands[2]) as fh:
             verticesMapping[edge[1]].append(edge[0])
         elif not edge[1] in verticesMapping:
             verticesMapping[edge[1]] = [edge[0]]
+
 # For debugging the data available
 #debugData(verticesDict, launchesDict, verticesMapping)
 
-# Feasibility
+# Checks the feasibility of the data
+# Does all the vertices have connections?
 if not [value for value in verticesMapping.values()]:
     sys.exit("Error: insufficient number of edges")
+# Is the sum of the maximum payload of the launches bigger that the sum of the weight of the vertices ?
 
 # Problem formulaion
 problem = Problem(verticesDict, launchesDict, verticesMapping)
@@ -71,16 +82,16 @@ problem = Problem(verticesDict, launchesDict, verticesMapping)
 STRATEGY = 'uniformCost'
 
 start = time.time()
-# Search algorithm
-solution, iteration = search.SEARH(problem, STRATEGY)
+# Uninformed Search algorithm
+solution, iteration = search.ugs(problem, STRATEGY)
 
-# Writing parameters to file
+# Writing parameters to the file and terminal
 file.write(commands[2] + "\t" + STRATEGY + "\n")
 print('\n\n\nEXECUTION TIME: ', time.time()-start)
 file.write("iterations\t" + str(iteration) + "\n")
 file.write("execution time\t" + str(time.time()-start) + "\n")
 
-# Solution print for serial
+# Solution print for file and terminal
 if solution:
     file.write("solution\n")
     print("\n\nSOLUTION")
@@ -107,4 +118,5 @@ else:
     print("\n\nNO SOLUTION\n", 0)
     file.write("no solution\n" + str(0)+"\n\n")
 
+# Closes the file
 file.close()
