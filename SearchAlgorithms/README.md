@@ -12,3 +12,14 @@ To test, use the command:
 python solver.py -i(informed)/-u(uninformed) textfile.txt
 
 The program will create a file named "AI.txt" that contains the solution and the time and number of iterations to solve the problem.
+
+Copyright (C) 2017 João Barroca <joao.barroca@tecnico.ulisboa.pt>
+
+License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published
+by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
