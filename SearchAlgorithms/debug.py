@@ -4,6 +4,7 @@ Created on Fri Oct 20, 2017
 @author: João Barroca <joao.barroca@tecnico.ulisboa.pt>
 """
 
+# shows the data processed from the read file
 def debugData(verticesDict, launchesDict, verticesMapping):
     print('\n=================================== LAUNCHES AVAILABLE')
     for key in launchesDict.keys():
@@ -16,18 +17,13 @@ def debugData(verticesDict, launchesDict, verticesMapping):
     for key in verticesMapping.keys():
         print('%s \t %s' % (key, ' '.join(verticesMapping[key])))
 
-def debugProbleInit(initialState, goal, pathCost, actions):
-    print('\n=================================== PROBLEM')
-    print('InitialState: %s' % initialState)
-    print('Goal: %s' % goal)
-    print('Cost: %s' % pathCost)
-    print('Actions: %s' % actions)
-
-def debugGraphSearch(iteration, node, frontier):
+# shows the node being explored, the frontier size and number of iterations
+def ugsDebug(iteration, node, frontier):
     print('\n\nITERATION', iteration)
     print('\nEXPLORED NODE', (node['state'], node['pathCost']))
     print('\nFRONTIER SIZE', len(frontier))
 
+# shows the state, the action that will be performed, the resulted state and the action cost
 def debugTransitionModel(state, action, newState, cost):
     print('\nSTATE: ', state)
     print('ACTION: ', action)
