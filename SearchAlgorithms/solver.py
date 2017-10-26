@@ -12,12 +12,12 @@ except IOError:
 
 # Importing the libraries
 from problemFormulation import Problem
-from debug import *
 from operator import itemgetter
 import datetime
 import time
 import sys
 import search
+import debug
 
 # Process the commands reveiced throught terminal
 commands = sys.argv
@@ -48,10 +48,10 @@ with open(commands[2]) as fh:
             launches.append([delta.days, line.split()[1], float(line.split()[2]), float(line.split()[3]), float(line.split()[4])])
             # Sorts launches by date
             launches.sort(key = itemgetter(0))
-    counter = 1
-
+    
     # Creates  a dict of the launches whoose keys are the available launches (already orderer by date) with a list containing
     # ['date', maximum payload, fixed cost, variable cost] as valors
+    counter = 1
     for launch in launches:
         launchesDict['L'+str(counter)] = launch[1:5]
         counter = counter + 1
