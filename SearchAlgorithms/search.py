@@ -13,9 +13,7 @@ You should have received a copy of the GNU General Public License along with thi
 # Importing the libraries
 from domainIndependent import *
 from operator import itemgetter
-import numpy as np
 import itertools
-import time
 
 # General Graphic Search (with goal state verification only after choosing a leaf node!)
 def gs(problem, strategy):
