@@ -14,6 +14,7 @@ You should have received a copy of the GNU General Public License along with thi
 from operator import itemgetter
 import copy
 import datetime
+import time
 
 # Problem Formulation
 class Problem():
