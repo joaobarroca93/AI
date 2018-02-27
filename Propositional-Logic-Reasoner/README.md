@@ -1,6 +1,6 @@
 # Propositional Logic Reasoner
 
-A simple propositional logic reasoner based on Resolution.
+A simple propositional logic reasoner based on CNF conversion and Resolution.
 
 Copyright (C) 2017 João Barroca <joao.barroca@tecnico.ulisboa.pt>
 
